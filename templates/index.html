@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -12,62 +11,33 @@
 </head>
 
 <body class="bg-light">
-    <form method="POST" action="/">
+    <form method="POST" action="/create-path">
 
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-2">
                     <div class="card mt-5">
                         <div class="card-header">
-                            <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#path">
-                                    Solution: {{time}}
-                                </button>
-                                <button type="submit" class="btn btn-primary">Update Path</a>
-                            </div>
+                            <h3>
+                                Select Location
+                            </h3>
                         </div>
                         <ul class="list-group d-flex justify-content-between">
                             {% for unit in units %}
                             <li class="list-group-item">
                                 <div class="d-flex justify-content-between">
-                                    <b>{{unit}}</b>
-                                    <input type="checkbox" value="{{unit}}" name="check" {% if unit in checked %}
-                                        checked {% endif %}>
+                                    <a class="btn btn-primary" href="/create-path/{{unit}}">{{unit}}</a>
+                                    <span>
+                                        {{unit.getDaysLeft()}} days until depletion.
+                                    </span>
                                 </div>
                             </li>
                             {% endfor %}
                         </ul>
-                        <!--BEGIN MODAL-->
-                        <div class="modal fade" id="path" tabindex="-1" aria-labelledby="unitLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Path:</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Body of Modal -->
-                                        <h4>Steps:</h4>
-                                        {% for step in path %}
-                                        {{step}}
-                                        <br>
-                                        {% endfor %}
-                                        <hr>
-                                        Total Time: {{time}}
-                                        <!-- End body of Modal -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--END MODAL-->
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </body>
-
 </html>
